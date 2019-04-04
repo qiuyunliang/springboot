@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tornado.demo.CustomerMapper">
+
+    <!-- type属性指定要映射的实体类，由于在conf.xml中已经用`<typeAliases>`配置了包名，故此地不用写全类名 -->
+    <resultMap type="Customer" id="customerResult">
+        <!-- 主键用<id>标签，表示把表中的CustomerID字段映射到实体类Customer中的id属性 -->
+        <id property="id" column="CustomerID"/>
+        <!-- 非主键用<reslut>标签，表示把表中的CustomerName字段映射到实体类Customer的name属性 -->
+        <result property="name" column="CustomerName"/>
+        <result property="contactName" column="ContactName"/>
+        <result property="address" column="Address"/>
+        <result property="city" column="City"/>
+        <result property="country" column="Country"/>
+        <result property="postalCode" column="PostalCode"/>
+    </resultMap>
+
+    <select id="selectCustomer" parameterType="int" resultMap="customerResult">
+        select * from customers where CustomerID = #{id}
+    </select>
+</mapper>
