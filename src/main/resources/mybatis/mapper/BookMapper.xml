@@ -4,6 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tornado.demo.BookMapper">
     <select id="selectBook" parameterType="int" resultType="com.tornado.demo.entity.Book">
-    select * from book where id = #{id}
+    select * from book
   </select>
+
+    <insert id="insertBook" parameterType="com.tornado.demo.entity.Book">
+        insert into book(id, name) values(#{id}, #{name})
+    </insert>
 </mapper>

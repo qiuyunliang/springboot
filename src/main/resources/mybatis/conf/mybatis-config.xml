@@ -1,21 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE configuration
-        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
+    <!-- resource指定配置文件优先级高于下列属性值，SqlSessionFactoryBuilder.build 传递的属性优先级最高 -->
     <properties resource="mybatis/conf/mybatis.properties">
+        <!-- 优先级最低属性配置 -->
         <property name="username" value="root"/>
         <property name="password" value="mysql"/>
     </properties>
 
+    <settings>
+        <!-- 打印查询语句 -->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+        <!-- 允许JDBC支持生成的键 -->
+        <setting name="useGeneratedKeys" value="true" />
+        <!--<setting name="cacheEnabled" value="true"/>-->
+        <!--<setting name="lazyLoadingEnabled" value="true"/>-->
+        <!--<setting name="multipleResultSetsEnabled" value="true"/>-->
+        <!--<setting name="useColumnLabel" value="true"/>-->
+        <!--<setting name="autoMappingBehavior" value="PARTIAL"/>-->
+        <!--<setting name="autoMappingUnknownColumnBehavior" value="WARNING"/>-->
+        <!--<setting name="defaultExecutorType" value="SIMPLE"/>-->
+        <!--<setting name="defaultStatementTimeout" value="25"/>-->
+        <!--<setting name="defaultFetchSize" value="100"/>-->
+        <!--<setting name="safeRowBoundsEnabled" value="false"/>-->
+        <!--<setting name="mapUnderscoreToCamelCase" value="false"/>-->
+        <!--<setting name="localCacheScope" value="SESSION"/>-->
+        <!--<setting name="jdbcTypeForNull" value="OTHER"/>-->
+        <!--<setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString"/>-->
+    </settings>
+
+    <!-- 配置类型别名，减少全路径的拼写 -->
     <typeAliases>
         <package name="com.tornado.demo.entity"/>
     </typeAliases>
 
+    <!-- 类型处理器，在*Mapper.xml文件中使用typeHandler=... -->
+    <!--<typeHandlers>-->
+        <!--<typeHandler handler="com.tornado.demo.handler.MoneyTypeHandler"/>-->
+    <!--</typeHandlers>-->
+
+    <!-- 环境配置 -->
     <environments default="development">
         <environment id="development">
+            <!-- 事务管理器 -->
             <transactionManager type="JDBC"/>
+            <!-- 数据源 -->
             <dataSource type="POOLED">
                 <property name="driver" value="${driver}"/>
                 <property name="url" value="${url}"/>
@@ -25,8 +55,17 @@
         </environment>
     </environments>
 
+    <!-- 映射器 -->
     <mappers>
+        <!-- 使用相对于类路径的资源引用 -->
         <mapper resource="mybatis/mapper/CustomerMapper.xml"/>
         <mapper resource="mybatis/mapper/BookMapper.xml"/>
+        <!--&lt;!&ndash; 使用映射器接口实现类的完全限定类名 &ndash;&gt;-->
+        <!--<mapper class="org.mybatis.builder.AuthorMapper"/>-->
+        <!--&lt;!&ndash; 使用完全限定资源定位符（URL） &ndash;&gt;-->
+        <!--<mapper url="file:///var/mappers/PostMapper.xml"/>-->
+        <!--&lt;!&ndash; 将包内的映射器接口实现全部注册为映射器 &ndash;&gt;-->
+        <!--<package name="org.mybatis.builder"/>-->
     </mappers>
+
 </configuration>

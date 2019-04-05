@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tornado.demo.CustomerMapper">
 
     <!-- type属性指定要映射的实体类，由于在conf.xml中已经用`<typeAliases>`配置了包名，故此地不用写全类名 -->
@@ -20,4 +18,20 @@
     <select id="selectCustomer" parameterType="int" resultMap="customerResult">
         select * from customers where CustomerID = #{id}
     </select>
+
+    <insert id="insertCustomer">
+        insert into customers (CustomerID,CustomerName,ContactName,Address,City,Country,PostalCode)
+        values (#{CustomerID},#{CustomerName},#{ContactName},#{Address},#{City},#{Country},#{PostalCode})
+    </insert>
+
+    <update id="updateCustomer">
+        update customers set
+            CustomerName = #{CustomerName},
+            ContactName = #{ContactName}
+        where CustomerID = #{CustomerID}
+    </update>
+
+    <delete id="deleteCustomer">
+        delete from customers where CustomerID = #{CustomerID}
+    </delete>
 </mapper>
