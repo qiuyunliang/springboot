@@ -1,5 +1,6 @@
 package com.tornado.demo;
 
+import com.tornado.demo.dao.SqlSessionUtil;
 import com.tornado.demo.entity.Coffee;
 import com.tornado.demo.mapper.CoffeeMapper;
 import com.tornado.demo.service.BookServiceImpl;
@@ -59,18 +60,19 @@ public class DemoApplication implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         log.info(jedisPoolConfig.toString());
 
-        try (Jedis jedis = jedisPool.getResource()) {
-            bookService.findAll().forEach(c -> jedis.hset("book", String.valueOf(c.getId()), c.getName()));
-
-            Map<String, String> menu = jedis.hgetAll("book");
-            log.info("books: {}", menu);
-
-            String price = jedis.hget("book", "1");
-            log.info("book name: {}", price);
-        }
+//        try (Jedis jedis = jedisPool.getResource()) {
+//            bookService.findAll().forEach(c -> jedis.hset("book", String.valueOf(c.getId()), c.getName()));
+//
+//            Map<String, String> menu = jedis.hgetAll("book");
+//            log.info("books: {}", menu);
+//
+//            String price = jedis.hget("book", "1");
+//            log.info("book name: {}", price);
+//        }
 
         Coffee c = Coffee.builder().name("espresso")
                 .price(Money.of(CurrencyUnit.of("CNY"), 20.0)).build();
+//        CoffeeMapper coffeeMapper = SqlSessionUtil.getInstance().openSession().getMapper(CoffeeMapper.class);
         Long id = coffeeMapper.save(c);
         log.info("Coffee {} => {}", id, c);
 

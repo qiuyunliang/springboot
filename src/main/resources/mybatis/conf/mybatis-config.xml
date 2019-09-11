@@ -36,9 +36,9 @@
     </typeAliases>
 
     <!-- 类型处理器，在*Mapper.xml文件中使用typeHandler=... -->
-    <!--<typeHandlers>-->
-        <!--<typeHandler handler="com.tornado.demo.handler.MoneyTypeHandler"/>-->
-    <!--</typeHandlers>-->
+    <typeHandlers>
+        <typeHandler handler="com.tornado.demo.handler.MoneyTypeHandler"/>
+    </typeHandlers>
 
     <!-- 环境配置 -->
     <environments default="development">
@@ -58,10 +58,10 @@
     <!-- 映射器 -->
     <mappers>
         <!-- 使用相对于类路径的资源引用 -->
-        <mapper resource="mybatis/mapper/CustomerMapper.xml"/>
-        <mapper resource="mybatis/mapper/BookMapper.xml"/>
+        <!--<mapper resource="mybatis/mapper/CustomerMapper.xml"/>-->
+        <!--<mapper resource="mybatis/mapper/BookMapper.xml"/>-->
         <!--&lt;!&ndash; 使用映射器接口实现类的完全限定类名 &ndash;&gt;-->
-        <!--<mapper class="org.mybatis.builder.AuthorMapper"/>-->
+        <!--<mapper class="com.tornado.demo.mapper.CoffeeMapper"/>-->
         <!--&lt;!&ndash; 使用完全限定资源定位符（URL） &ndash;&gt;-->
         <!--<mapper url="file:///var/mappers/PostMapper.xml"/>-->
         <!--&lt;!&ndash; 将包内的映射器接口实现全部注册为映射器 &ndash;&gt;-->

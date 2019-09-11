@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.tornado.demo.CustomerMapper">
+<mapper namespace="com.tornado.demo.mapper.CustomerMapper">
 
     <!-- type属性指定要映射的实体类，由于在conf.xml中已经用`<typeAliases>`配置了包名，故此地不用写全类名 -->
     <resultMap type="Customer" id="customerResult">

@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.tornado.demo.dao.SqlSessionUtil;
 import com.tornado.demo.entity.Book;
 import com.tornado.demo.entity.Customer;
+import com.tornado.demo.mapper.CustomerMapper;
 import com.tornado.demo.service.BookServiceImpl;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,12 @@ public class BaseController {
     @RequestMapping(method = RequestMethod.GET, path = "/query")
     public String query() {
         SqlSession session = SqlSessionUtil.getInstance().openSession();
-        // Book customer = session.selectOne("com.tornado.demo.BookMapper.selectBook", 1);
-        Customer customer = session.selectOne("com.tornado.demo.CustomerMapper.selectCustomer", 1);
-        return customer.toString();
+        // 方式一
+        Customer customer1 = session.selectOne("com.tornado.demo.CustomerMapper.selectCustomer", 1);
+        // 方式一
+        CustomerMapper customerMapper = session.getMapper(CustomerMapper.class);
+        Customer customer2 = customerMapper.selectCustomer(1);
+        return customer1.toString();
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/index")
